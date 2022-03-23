@@ -1,0 +1,40 @@
+{
+  "en": {
+    "translation": {
+      "shipping Address": "Shipping Address",
+      "save": "save",
+      "total": "total",
+      "order summary": "Order summary",
+      "overview": "overview",
+      "my orders": "my orders",
+      "my wishlist": "my wishlist",
+      "my gifts": "my gifts",
+      "change language": "change language",
+      "Full Name": "Full Name",
+      "City": "City",
+      "Street Address": "Street Address",
+      "Phone Number": "Phone Number",
+      "set as default address": "set as default address",
+      "Add Order": "Add Order"
+    }
+  },
+  "fr": {
+    "translation": {
+      "shipping Address": "Adresse de livraison",
+      "save": "enregistrer",
+      "total": "totale",
+      "order summary": "Récapitulatif de la commande",
+      "overview": "générale",
+      "my orders": "mes commandes",
+      "my wishlist": "ma liste d'envies",
+      "my gifts": "mes cadeaux",
+      "change language": "changer de langue",
+      "Full Name": "Nom Complet",
+      "City": "Ville",
+      "Street Address": "Adresse de la rue",
+      "Phone Number": "numéro de téléphone",
+      "set as default address": "définir comme adresse par défaut",
+      "Add Order": "Ajouter une commande"
+    }
+  }
+}

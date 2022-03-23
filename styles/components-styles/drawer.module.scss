@@ -1,0 +1,39 @@
+.drawer-active {
+  position: fixed;
+  padding: 0.6em;
+  top: 0;
+  bottom: 0;
+  right: -40%;
+  height: 100vh;
+  width: 40%;
+  background-color: $alt-bg;
+
+  z-index: 3001;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-footer {
+  position: absolute;
+  bottom: 1em;
+  left: 0.5em;
+  padding-inline: 1em;
+  right: 0.5em;
+}
+
+.drawer-checkout-btn {
+  display: block;
+  background-color: $primary-color;
+  border-radius: 1em;
+  padding: 0.6em;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.3s all;
+  border: 0.1em solid $primary-color;
+  color: white;
+  &:hover {
+    background-color: lighten($color: $primary-color, $amount: 90%);
+    color: $primary-color;
+  }
+}

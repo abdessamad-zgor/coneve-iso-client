@@ -1,0 +1,24 @@
+.message-error {
+  border: 0.2em solid rgb(255, 197, 197);
+  background-color: rgb(255, 158, 158);
+  border-radius: 1em;
+  padding: 1em 2em;
+  width: 100%;
+  margin-block: 0.5em;
+  display: block;
+}
+
+.message-succesfull {
+  border: 0.2em solid rgb(200, 252, 195);
+  background-color: rgb(158, 255, 150);
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  width: 100%;
+  margin-block: 0.5em;
+  display: block;
+}
+
+.message-text {
+  font-family: $dfl-font;
+  color: rgba(39, 133, 30, 0.79);
+}

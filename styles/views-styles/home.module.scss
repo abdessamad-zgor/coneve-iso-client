@@ -1,0 +1,40 @@
+.home {
+  width: 100%;
+}
+
+.slider {
+  z-index: 1;
+}
+.title {
+  padding: 1em;
+
+  color: $primary-color;
+}
+
+.collection-card {
+  border: 0.1em solid $border-simple;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.collection-card-1 {
+  @extend .collection-card;
+  grid-column: 1 2;
+  grid-row: 1 2;
+}
+.collection-card-2 {
+  @extend .collection-card;
+  grid-column: 2 3;
+  grid-row: 1 2;
+}
+.collection-card-3 {
+  @extend .collection-card;
+  grid-column: 1 2;
+  grid-row: 2 3;
+}
+.collection-card-4 {
+  @extend .collection-card;
+  grid-column: 2 3;
+  grid-row: 2 3;
+}

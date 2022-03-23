@@ -1,0 +1,229 @@
+.flex {
+  display: flex;
+}
+
+.center-flex {
+  @extend .flex;
+  justify-content: center;
+}
+
+.align-center-flex {
+  @extend .center-flex;
+  align-items: center;
+}
+
+.thin {
+  font-weight: 300;
+}
+
+.small {
+  font-size: 0.9em;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.big {
+  font-size: 2em;
+}
+
+.dfl-font {
+  font-family: $dfl-font;
+}
+
+.bold {
+  font-weight: 1000;
+}
+
+.row {
+  width: 50%;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.flex-column {
+  @extend .center-flex;
+  flex-direction: column;
+}
+.align-flex-column {
+  @extend .flex-column;
+  align-items: center;
+}
+.grey {
+  color: rgba(75, 75, 75, 0.733);
+}
+
+.alt-btn {
+  background-color: rgba(255, 153, 37, 0.384);
+  border: none;
+  border-radius: 0.2em;
+  width: 100%;
+
+  padding-block: 0.3em;
+  padding-inline: 0.5em;
+  box-shadow: 0.1em 0.1em 0.1em 0.1em rgba(128, 128, 128, 0.178);
+}
+
+.container {
+  width: 100%;
+}
+
+.hidden {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.half {
+  width: 48%;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.layer {
+  @extend .flex-column;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  padding-top: 5em;
+  background-color: rgba(0, 0, 0, 0.35);
+  display: none;
+
+  &:hover {
+    display: block;
+  }
+}
+
+.card {
+  width: 30%;
+  padding: 0.5em;
+  text-align: center;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 3em;
+  box-shadow: 0.1em 0.1em 0.3em rgba(0, 0, 0, 0.952);
+}
+
+.lgh-font {
+  color: $primary-color;
+}
+
+.dr-font {
+  color: $secondary-color;
+}
+
+.display-font {
+  font-family: $display-font;
+}
+
+.display-logo {
+  font-family: $display-font;
+  font-size: 2.5em;
+}
+.alt-font {
+  font-family: $alt-font;
+}
+
+.alt-cl {
+  color: $alt-color;
+}
+
+.icon {
+  fill: $secondary-color;
+}
+
+.fab {
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  margin: 0.1em;
+  padding: 0.1em;
+  cursor: pointer;
+  &:hover {
+    svg {
+      fill: $primary-color;
+    }
+    background-color: rgba(255, 227, 175, 0.13);
+  }
+}
+
+.fab-small {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  margin: 0.3em;
+  padding: 0.2em;
+  &:hover {
+    svg {
+      fill: $primary-color;
+    }
+    background-color: rgba(255, 227, 175, 0.13);
+  }
+}
+
+.text-align {
+  text-align: center;
+}
+
+.fab-tiny {
+  @extend .fab;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0.1em;
+}
+
+.hide {
+  animation: fadeOut 0.1s ease-out 1 forwards;
+}
+
+.loading {
+  position: relative;
+  background-color: #e2e2e2;
+  overflow-x: hidden;
+
+  &.card-image {
+    border-radius: 0;
+  }
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: loading 1.5s infinite;
+  }
+}
+
+.stretch {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.grid-2x2 {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: 1em 2em;
+}
+
+.tiny {
+  font-size: 0.4em;
+}
+
+.container-full {
+  width: 100%;
+  height: 100%;
+}

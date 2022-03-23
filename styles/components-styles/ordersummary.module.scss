@@ -1,0 +1,33 @@
+.order-summary {
+  width: 100%;
+  border: 0.1em solid $border-simple;
+  border-radius: 1em;
+  box-shadow: 0.1em 0.2em 0.5em 0.1em $border-simple-2;
+  display: block;
+}
+
+.order-summary-content {
+  width: 100%;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.order-summary-footer {
+  float: inline-start;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+  box-shadow: 0.1em 0.2em 0.5em 0.1em $border-simple-2;
+  padding: 0.5em;
+  background-color: $primary-color;
+  border-radius: 0.7em;
+  .title {
+    color: white;
+  }
+  .order-total {
+    color: white;
+  }
+}

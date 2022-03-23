@@ -1,0 +1,21 @@
+.account-tabs {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+.account-tab {
+  font-family: $alt-font;
+  text-align: center;
+  width: 100%;
+  color: rgba(128, 128, 128, 0.747);
+  background-color: white;
+  transition: 0.2s all;
+  &:hover {
+    color: $primary-color;
+    background-color: white;
+    transform: scale(1.1);
+    border: 0.1em solid $primary-color;
+    border-radius: 0.3em;
+  }
+}

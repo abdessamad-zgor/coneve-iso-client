@@ -1,0 +1,42 @@
+.layout-root {
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+.layout-page-oulet {
+  padding-top: 5em;
+  padding-bottom: 3.5em;
+  padding-inline: 1em;
+}
+body {
+  font-family: $dfl-font;
+  width: 100vw;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $dfl-font;
+  padding: 0.6em;
+  color: $primary-color;
+}
+
+h4,
+h5,
+h6,
+p,
+label {
+  font-family: $alt-font;
+  padding: 0.1em;
+  color: rgba(128, 128, 128, 0.822);
+  font-weight: 400;
+}

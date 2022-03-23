@@ -1,0 +1,13 @@
+.auth {
+  width: 100%;
+}
+
+.form-container {
+  padding-top: 8em;
+  width: 50%;
+  margin: auto;
+  @media screen and (max-width: $breakpoint-mb) {
+    width: 90%;
+    padding-top: 2em;
+  }
+}

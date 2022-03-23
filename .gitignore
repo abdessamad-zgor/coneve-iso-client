@@ -1,0 +1,7 @@
+/node_modules
+.vscode
+.firebaserc
+firebase.json
+.git
+webpack.prod.js
+yarn.lock

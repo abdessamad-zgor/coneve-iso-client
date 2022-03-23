@@ -1,0 +1,33 @@
+.searchbar {
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+  flex-grow: 2;
+  @media screen and (max-width: 800px) {
+    display: none;
+    pointer-events: none;
+  }
+}
+
+.searchbar-input {
+  width: 100%;
+}
+
+.searchbar-input-el {
+  padding: 0.5em;
+  border: 0.1em solid rgba(128, 128, 128, 0.13);
+  width: 100%;
+  border-radius: 1em;
+  transition: 0.2s all;
+  &:focus {
+    border: 0.1em solid $border-colored;
+  }
+}
+
+.searchbar-icon {
+  @extend .fab-small;
+  margin-inline: 0.4em;
+  padding: 0.2em;
+}

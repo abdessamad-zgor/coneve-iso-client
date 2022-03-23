@@ -1,0 +1,55 @@
+@keyframes slideDrawer {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: all;
+  }
+}
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes expand {
+  0% {
+    flex: 0;
+  }
+  100% {
+    flex: 1;
+  }
+}
+
+@keyframes slideBar {
+  0% {
+    transform: translateY(-40vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripples {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+
+  100% {
+    width: 100px;
+    height: 100px;
+  }
+}
