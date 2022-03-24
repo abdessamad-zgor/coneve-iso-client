@@ -1,11 +1,8 @@
 import _fetch from 'isomorphic-fetch';
-import { useSelector } from 'react-redux';
 const fetch = async function (config) {
   try {
-    let idToken = useSelector((state) => {
-      return state.user.info.idToken;
-    });
-    let response = await _fetch({ ...config, body: { ...config.body, idToken } });
+    let { url, ...options } = config;
+    let response = await _fetch(url, { ...options });
     let data = await response.json();
 
     if (response.status >= 400) {

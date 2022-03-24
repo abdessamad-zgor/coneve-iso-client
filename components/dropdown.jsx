@@ -87,7 +87,7 @@ function Dropdown(props) {
 
 const mapStateToProps = (state) => {
   return {
-    userName: state.user.info.value.displayName,
+    userName: state.user.info.value.fullName,
     email: state.user.info.value.email,
     loggedIn: state.user.info.loggedIn,
   };

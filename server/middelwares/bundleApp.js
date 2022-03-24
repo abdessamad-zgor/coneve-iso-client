@@ -6,11 +6,8 @@ function bundleApp() {
   let config;
   if (process.env.NODE_ENV == 'production') {
     config = require('../../webpack.prod');
-    console.log(config);
   } else {
     config = require('../../webpack.config');
-    console.log(config);
-    console.log('dev');
   }
 
   let files = fs.readdirSync(path.resolve(__dirname, '../../dist/app'));

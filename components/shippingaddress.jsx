@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-
 import { useForm } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Message from './message';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { addOrderThunk, changeAddressThunk } from '../store/thunks/userThunks';
+import { addOrderThunk, changeAddressThunk, getAddressThunk } from '../store/thunks/userThunks';
 
 function ShippingAddress(props) {
   //use translation
@@ -17,6 +16,10 @@ function ShippingAddress(props) {
     formState: { errors },
   } = useForm();
   const location = useLocation();
+
+  useEffect(() => {
+    dispatch(getAddressThunk());
+  }, []);
 
   //check if the component is in the Checkout view
   let isCheckout = location.pathname == '/checkout';

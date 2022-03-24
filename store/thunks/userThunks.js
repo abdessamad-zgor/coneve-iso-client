@@ -13,6 +13,7 @@ const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
         returnSecureToken: true,
       },
     });
+    console.log(resAuth);
     let resUser = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'GET',
@@ -33,6 +34,7 @@ const signUpUserThunk = createAsyncThunk('user/signUpUser', async (data) => {
       method: 'POST',
       body: { email: data.email, password: data.password, returnSecureToken: true },
     });
+    console.log(resAuth);
     await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'POST',
@@ -60,7 +62,7 @@ const addOrderThunk = createAsyncThunk('user/addOrder', async (data) => {
   // }
   try {
     await fetch({
-      url: `localhost:5000/api/authenticated/users/${data.user.uid}/orders`,
+      url: `http://localhost:5000/api/authenticated/users/${data.user.uid}/orders`,
       method: 'POST',
       body: { ...data },
     });

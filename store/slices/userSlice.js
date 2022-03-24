@@ -5,12 +5,10 @@ import {
   signUpUserThunk,
   addOrderThunk,
   changeAddressThunk,
-  signOutThunk,
   getOrdersThunk,
   getCouponsThunk,
 } from '../thunks/userThunks';
-import { getPersistedData } from '../common/actions';
-import _ from 'lodash';
+import { getPersistedData, signOutUser } from '../common/actions';
 
 const initialState = {
   info: {
@@ -116,20 +114,17 @@ const userSlice = createSlice({
         state.orders.status = 'failed';
         state.orders.error = action.error;
       })
-      .addCase(signOutThunk.pending, (state, action) => {
-        state.info.status = 'loading';
-      })
-      .addCase(signOutThunk.fulfilled, (state, action) => {
-        state.info.status = 'completed';
+      .addCase(signOutUser, (state, action) => {
+        state.address.value = {};
+        state.coupons.value = [];
+        state.info.status = 'idle';
         state.info.value = {};
-        state.info.address = {};
-        state.orders.data = [];
-        state.wishlist.data = [];
+        state.info.idToken = '';
         state.info.loggedIn = false;
-      })
-      .addCase(signOutThunk.rejected, (state, action) => {
-        state.info.status = 'failed';
-        state.info.error = action.error;
+        state.info.refreshToken = '';
+
+        state.orders.value = [];
+        state.wishlist.value = [];
       })
       .addCase(getOrdersThunk.pending, (state, action) => {
         state.orders.status = 'loading';

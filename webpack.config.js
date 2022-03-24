@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
 // const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
@@ -9,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/app'),
     filename: 'main.js',
   },
+  mode: 'development',
   module: {
     rules: [
       {
@@ -34,11 +36,17 @@ module.exports = {
       filename: 'index.css',
     }),
     new BundleAnalyzerPlugin(),
+    ,
     // new CompressionPlugin({
     //   test: /\.js(\?.*)?$/i,
     //   filename: '',
     //   algorithm: 'gzip',
     //   deleteOriginalAssets: false,
     // }),
-  ],
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
+      'process.env.HOST': JSON.stringify(process.env.HOST),
+    }),
+  ].filter(Boolean),
 };
