@@ -1,11 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const webpack = require('webpack');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const webpack = require('webpack');
 // const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  entry: [path.resolve(__dirname, 'index.js'), 'regenerator-runtime/runtime'],
+  entry: [path.resolve(__dirname, 'index.js'), 'regenerator-runtime/runtime.js'],
   output: {
     path: path.resolve(__dirname, 'dist/app'),
     filename: 'main.js',
@@ -35,18 +35,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
-    new BundleAnalyzerPlugin(),
-    ,
+    // new BundleAnalyzerPlugin(),
     // new CompressionPlugin({
     //   test: /\.js(\?.*)?$/i,
     //   filename: '',
     //   algorithm: 'gzip',
     //   deleteOriginalAssets: false,
     // }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
-      'process.env.HOST': JSON.stringify(process.env.HOST),
-    }),
-  ].filter(Boolean),
+  ],
 };

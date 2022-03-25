@@ -147,14 +147,17 @@ const userSlice = createSlice({
       .addCase(getCouponsThunk.rejected, (state, action) => {
         state.coupons.status = 'failed';
         state.coupons.error = action.error;
-      })
-
-      .addCase(getPersistedData, (state, action) => {
-        let data = JSON.parse(localStorage.getItem('state'));
-        state.info = data.user.info;
-        state.orders = data.user.orders;
-        state.wishlist = data.user.wishlist;
       });
+
+    // .addCase(getPersistedData, (state, action) => {
+    //   let data = JSON.parse(localStorage.getItem('state'));
+    //   if (data == (null || {})) {
+    //     return state;
+    //   }
+    //   state.info = data.user.info;
+    //   state.orders = data.user.orders;
+    //   state.wishlist = data.user.wishlist;
+    // });
   },
 });
 

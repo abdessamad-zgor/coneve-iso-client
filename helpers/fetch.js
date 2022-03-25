@@ -1,15 +1,11 @@
-import _fetch from 'isomorphic-fetch';
+import axios from 'axios';
 const fetch = async function (config) {
   try {
-    let { url, ...options } = config;
-    let response = await _fetch(url, { ...options });
-    let data = await response.json();
+    let response = await axios({ ...config, data: { ...config.body } });
 
-    if (response.status >= 400) {
-      throw new Error(data.message);
-    }
-    return data;
+    return response;
   } catch (e) {
+    console.error(e);
     throw e;
   }
 };

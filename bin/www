@@ -4,13 +4,19 @@ require('@babel/register');
 require('dotenv').config();
 
 var app = require('../server/app');
-var http = require('http');
+var fs = require('fs');
+var https = require('https');
 var debug = require('debug')('express-app:server');
 
 const appPort = normalizePort(process.env.PORT || 3000);
 app.set('port', appPort);
 
-var appServer = http.createServer(app);
+const options = {
+  cert: fs.readFileSync('/home/tempo/Dev/Work/iso-app/app/cert.pem'),
+  key: fs.readFileSync('/home/tempo/Dev/Work/iso-app/app/key.pem'),
+};
+
+var appServer = https.createServer(options, app);
 
 appServer.listen(appPort);
 

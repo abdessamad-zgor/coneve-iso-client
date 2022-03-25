@@ -1,4 +1,7 @@
 function isEqual(object1, object2) {
+  if (object1 == null || object2 == null || object1 == undefined || object2 == undefined) {
+    return false;
+  }
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
   if (keys1.length !== keys2.length) {

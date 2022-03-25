@@ -3,16 +3,21 @@ const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
+const bodyParser = require('body-parser');
 
 //importing middlewares
 const renderViewMiddelware = require('./middelwares/renderView');
+
+//importing proxy route
+
+const proxyRoute = require('./proxy');
 
 const bundleApp = require('./middelwares/bundleApp');
 
 let app = express();
 
 app.use(morgan('combined'));
-
+app.use(bodyParser.json());
 app.options('*', cors());
 app.use(cors());
 app.use(
@@ -30,6 +35,8 @@ app.use(
 bundleApp();
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
+
+app.use('/proxy', [proxyRoute]);
 
 app.get('*', renderViewMiddelware);
 

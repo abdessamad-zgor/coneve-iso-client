@@ -5,7 +5,7 @@ import fetch from '../../helpers/fetch';
 const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
   try {
     let resAuth = await fetch({
-      url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.API_KEY}`,
+      url: `https://localhost:3000/proxy/login`,
       method: 'POST',
       body: {
         email: data.identifier,
@@ -30,15 +30,15 @@ const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
 const signUpUserThunk = createAsyncThunk('user/signUpUser', async (data) => {
   try {
     let resAuth = await fetch({
-      url: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.API_KEY}`,
+      url: `https://localhost:3000/proxy/signup`,
       method: 'POST',
       body: { email: data.email, password: data.password, returnSecureToken: true },
     });
-    console.log(resAuth);
+    console.log(resAuth.data.localId);
     await fetch({
-      url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
+      url: `http://localhost:5000/api/authenticated/users/${resAuth.data.localId}`,
       method: 'POST',
-      body: { ...data, refreshToken: resAuth.refreshToken, idToken: resAuth.idToken },
+      body: { ...data, refreshToken: resAuth.data.refreshToken, idToken: resAuth.data.idToken },
     });
 
     return data;
