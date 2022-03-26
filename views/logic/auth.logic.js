@@ -21,7 +21,7 @@ export default function useLogic(props) {
 
   const RedirectAction = () => {
     if (props.loggedIn) {
-      if (location.state.forced) {
+      if (location.state !== null && location.state.forced) {
         navigate(`/${location.state.for}`);
       } else {
         navigate('/');

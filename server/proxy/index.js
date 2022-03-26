@@ -5,6 +5,7 @@ let router = new express.Router();
 
 router.post('/login', async (req, res) => {
   try {
+    console.log(req.body);
     let response = await fetch({
       url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.API_KEY}`,
       body: req.body,
@@ -28,8 +29,8 @@ router.post('/login', async (req, res) => {
       console.log(e.request);
       res.status(500).json({ status: 'error', error: e.request });
     } else {
-      // Something happened in setting up the request that triggered an Error
       console.log('Error', e.message);
+      res.status(500).json({ status: 'error', error: e.message });
     }
   }
 });
@@ -44,7 +45,7 @@ router.post('/signup', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    res.status(200).json(response.data);
+    res.status(200).json(response);
   } catch (e) {
     if (e.response) {
       // The request was made and the server responded with a status code

@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Message from './message';
 import { useDispatch } from 'react-redux';
@@ -9,7 +11,7 @@ import { addOrderThunk, changeAddressThunk, getAddressThunk } from '../store/thu
 function ShippingAddress(props) {
   //use translation
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -145,4 +147,10 @@ function ShippingAddress(props) {
   );
 }
 
-export default ShippingAddress;
+const mapStateToProps = (state) => {
+  return {
+    defaultAddress: state.user.address.value,
+  };
+};
+
+export default connect(mapStateToProps)(ShippingAddress);

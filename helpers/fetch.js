@@ -3,7 +3,7 @@ const fetch = async function (config) {
   try {
     let response = await axios({ ...config, data: { ...config.body } });
 
-    return response;
+    return response.data;
   } catch (e) {
     console.error(e);
     throw e;

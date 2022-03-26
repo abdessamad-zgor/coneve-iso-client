@@ -17,7 +17,9 @@ const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
     let resUser = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'GET',
-      body: { idToken: resAuth.idToken },
+      headers: {
+        Authorization: `BASIC ${resAuth.idToken}`,
+      },
     });
 
     return { ...resAuth, ...resUser };
@@ -34,11 +36,14 @@ const signUpUserThunk = createAsyncThunk('user/signUpUser', async (data) => {
       method: 'POST',
       body: { email: data.email, password: data.password, returnSecureToken: true },
     });
-    console.log(resAuth.data.localId);
+    console.log(resAuth.localId);
     await fetch({
-      url: `http://localhost:5000/api/authenticated/users/${resAuth.data.localId}`,
+      url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'POST',
-      body: { ...data, refreshToken: resAuth.data.refreshToken, idToken: resAuth.data.idToken },
+      body: { ...data },
+      headers: {
+        Authorization: `BASIC ${resAuth.idToken}`,
+      },
     });
 
     return data;

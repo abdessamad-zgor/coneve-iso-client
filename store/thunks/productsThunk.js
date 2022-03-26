@@ -18,7 +18,7 @@ const getProductInView = createAsyncThunk('products/getProductInView', async (id
 
     let response = await fetch({ url: `http://localhost:5000/api/products/${id}`, method: 'GET' });
 
-    return response;
+    return response.data;
   } catch (e) {
     throw e;
   }
@@ -37,7 +37,7 @@ const populateIndex = createAsyncThunk('products/populateIndex', async () => {
   try {
     let response = await fetch({ url: `http://localhost:5000/api/products/index`, method: 'GET' });
     console.log(response);
-    return response;
+    return response.data;
   } catch (e) {
     throw e;
   }

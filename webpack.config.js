@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
 // const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     // new CompressionPlugin({
     //   test: /\.js(\?.*)?$/i,
     //   filename: '',
