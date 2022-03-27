@@ -75,8 +75,11 @@ const userSlice = createSlice({
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.info.status = 'completed';
         state.info.idToken = action.payload.idToken;
+        state.info.value.uid = action.payload.localId;
         state.info.refreshToken = action.payload.refreshToken;
-
+        state.info.value.fullName = action.payload.fullName;
+        state.info.value.phone = action.payload.phone;
+        state.info.value.email = action.payload.email;
         state.info.loggedIn = true;
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
@@ -147,17 +150,19 @@ const userSlice = createSlice({
       .addCase(getCouponsThunk.rejected, (state, action) => {
         state.coupons.status = 'failed';
         state.coupons.error = action.error;
-      });
+      })
 
-    // .addCase(getPersistedData, (state, action) => {
-    //   let data = JSON.parse(localStorage.getItem('state'));
-    //   if (data == (null || {})) {
-    //     return state;
-    //   }
-    //   state.info = data.user.info;
-    //   state.orders = data.user.orders;
-    //   state.wishlist = data.user.wishlist;
-    // });
+      .addCase(getPersistedData, (state, action) => {
+        let data = JSON.parse(localStorage.getItem('state'));
+        if (data == null) {
+          return state;
+        } else {
+          state.info = data.user.info;
+          state.address = data.user.address;
+          state.orders = data.user.orders;
+          state.wishlist = data.user.wishlist;
+        }
+      });
   },
 });
 

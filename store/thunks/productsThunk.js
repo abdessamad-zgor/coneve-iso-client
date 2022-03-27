@@ -18,7 +18,7 @@ const getProductInView = createAsyncThunk('products/getProductInView', async (id
 
     let response = await fetch({ url: `http://localhost:5000/api/products/${id}`, method: 'GET' });
 
-    return response.data;
+    return response;
   } catch (e) {
     throw e;
   }
@@ -36,8 +36,8 @@ const populateIndex = createAsyncThunk('products/populateIndex', async () => {
   // return index;
   try {
     let response = await fetch({ url: `http://localhost:5000/api/products/index`, method: 'GET' });
-    console.log(response);
-    return response.data;
+
+    return response;
   } catch (e) {
     throw e;
   }
@@ -56,8 +56,10 @@ const addReview = createAsyncThunk('products/addReview', async (params) => {
       url: `http://localhost:5000/api/authenticated/products/${params.id}/reviews`,
       method: 'POST',
       body: params.data,
+      headers: {
+        Authorization: `BASIC ${params.idToken}`,
+      },
     });
-    console.log(params.data);
     return { ...params.data };
   } catch (e) {
     throw e;

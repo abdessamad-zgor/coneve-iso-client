@@ -16,7 +16,8 @@ function Layout(props) {
   store.subscribe(() => {
     let state = store.getState();
     let data = JSON.parse(localStorage.getItem('state'));
-    if (isEqual(data, state)) {
+    console.log(data == null);
+    if (!isEqual(data, state)) {
       localStorage.setItem('state', JSON.stringify(state));
     }
   });

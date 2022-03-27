@@ -35,7 +35,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'index.css',
     }),
-    new BundleAnalyzerPlugin(),
     // new CompressionPlugin({
     //   test: /\.js(\?.*)?$/i,
     //   filename: '',

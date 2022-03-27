@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
+import { isEqual } from '../helpers/utils';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Message from './message';
 import { useDispatch } from 'react-redux';
@@ -20,7 +21,7 @@ function ShippingAddress(props) {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getAddressThunk());
+    dispatch(getAddressThunk({ uid: props.user.uid, idToken: props.idToken }));
   }, []);
 
   //check if the component is in the Checkout view
@@ -37,11 +38,12 @@ function ShippingAddress(props) {
         estimatedTotal: props.total,
         address: data,
         orderedAt: Date.now(),
+        idToken: props.idToken,
       };
       dispatch(addOrderThunk(order));
     } else {
-      if (!_.isEqual(props.address, address)) {
-        dispatch(changeAddressThunk(address));
+      if (!isEqual(props.address, address)) {
+        dispatch(changeAddressThunk({ ...address, idToken: props.idToken }));
       }
     }
   };
@@ -150,6 +152,7 @@ function ShippingAddress(props) {
 const mapStateToProps = (state) => {
   return {
     defaultAddress: state.user.address.value,
+    idToken: state.user.info.idToken,
   };
 };
 

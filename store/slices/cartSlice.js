@@ -51,16 +51,17 @@ const cartSlice = createSlice({
 
     default: (state) => {},
   },
-  // extraReducers(builder) {
-  //   builder.addCase(getPersistedData, (state, action) => {
-  //     let data = JSON.parse(localStorage.getItem('state'));
-  //     if (data == (null || {})) {
-  //       state.products = [];
-  //     }
-  //     console.log(data);
-  //     state.products = data.cart.products;
-  //   });
-  // },
+  extraReducers(builder) {
+    builder.addCase(getPersistedData, (state, action) => {
+      let data = JSON.parse(localStorage.getItem('state'));
+      if (data == null) {
+        state.products = [];
+      } else {
+        console.log(data == null);
+        state.products = data.cart.products;
+      }
+    });
+  },
 });
 
 export const { addToCart, addQuantity, reduceQuantity, removeFromCart } = cartSlice.actions;

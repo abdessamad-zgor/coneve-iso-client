@@ -13,7 +13,6 @@ const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
         returnSecureToken: true,
       },
     });
-    console.log(resAuth);
     let resUser = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'GET',
@@ -36,7 +35,6 @@ const signUpUserThunk = createAsyncThunk('user/signUpUser', async (data) => {
       method: 'POST',
       body: { email: data.email, password: data.password, returnSecureToken: true },
     });
-    console.log(resAuth.localId);
     await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'POST',
@@ -70,6 +68,7 @@ const addOrderThunk = createAsyncThunk('user/addOrder', async (data) => {
       url: `http://localhost:5000/api/authenticated/users/${data.user.uid}/orders`,
       method: 'POST',
       body: { ...data },
+      headers: { Authorization: `BASIC ${data.idToken}` },
     });
     if (data.address.setDefaultAddress) {
       const { setDefaultAddress, ...pureAddress } = data.address;
@@ -104,8 +103,9 @@ const signOutThunk = createAsyncThunk('user/signOut', async () => {
 const getAddressThunk = createAsyncThunk('user/getAddress', async (data) => {
   try {
     let response = await fetch({
-      url: `http://localhost:5000/api/authenticated/users/${data.id}/address`,
+      url: `http://localhost:5000/api/authenticated/users/${data.uid}/address`,
       method: 'GET',
+      headers: { Authorization: `BASIC ${data.idToken}` },
     });
     return response;
   } catch (e) {
@@ -126,6 +126,7 @@ const getOrdersThunk = createAsyncThunk('user/getOrder', async (data) => {
     let response = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${data.uid}/orders`,
       method: 'GET',
+      headers: { Authorization: `BASIC ${data.idToken}` },
     });
     return response.orders;
   } catch (e) {
@@ -146,6 +147,7 @@ const getCouponsThunk = createAsyncThunk('user/getCoupons', async (data) => {
     let response = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${data.uid}/coupons`,
       method: 'GET',
+      headers: { Authorization: `BASIC ${data.idToken}` },
     });
     return response.coupons;
   } catch (e) {

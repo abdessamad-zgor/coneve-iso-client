@@ -15,7 +15,7 @@ function Reviews(props) {
 
   const addReviewClick = () => {
     dispatch(
-      addReview({ id: props.productId, data: { ...newReview, username: props.username, idToken: props.idToken } })
+      addReview({ id: props.productId, data: { ...newReview, username: props.username }, idToken: props.idToken })
     );
   };
 
@@ -61,7 +61,7 @@ const mapStateToProps = (state) => {
   return {
     reviews: state.products.reviews.data,
     username: state.user.info.value.fullName,
-    idToken: state.user.info.value.idToken,
+    idToken: state.user.info.idToken,
   };
 };
 
