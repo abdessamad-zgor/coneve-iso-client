@@ -4,9 +4,11 @@ import ProductCard from '../components/productcard';
 import { populateIndex } from '../store/thunks/productsThunk';
 import { resetStatus } from '../store/slices/productSlice';
 import { useDispatch, connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Home(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if ((props.status == 'completed' || props.status == 'idle') && Object.keys(props.index).length == 0) {
       dispatch(populateIndex());
@@ -42,7 +44,17 @@ function Home(props) {
       </Carousel>
 
       <section className="home-collection">
-        <h2 className="title">Top Whole Sale Items</h2>
+        <div className="home-title">
+          <h2 className="">Top Whole Sale Items</h2>{' '}
+          <p
+            className="see-more"
+            onClick={() => {
+              navigate('/collections');
+            }}
+          >
+            See More ...
+          </p>
+        </div>
 
         <div className="container">
           <div className="align-center-flex wrap">
@@ -55,7 +67,17 @@ function Home(props) {
         </div>
       </section>
       <section className="home-collection">
-        <h2 className="title">Top Natural Products</h2>
+        <div className="home-title">
+          <h2 className="">Top Natural Products</h2>
+          <p
+            className="see-more"
+            onClick={() => {
+              navigate('/collections');
+            }}
+          >
+            See More ...
+          </p>
+        </div>
 
         <div className="container">
           <div className="align-center-flex wrap">

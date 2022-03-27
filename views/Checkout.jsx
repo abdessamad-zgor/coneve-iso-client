@@ -54,6 +54,7 @@ const mapStateToProps = (state) => {
     user: state.user.info.value,
     status: state.user.orders.status,
     error: state.user.orders.error,
+    coupons: state.user.coupons.value,
   };
 };
 

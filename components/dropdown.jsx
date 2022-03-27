@@ -22,7 +22,12 @@ function Dropdown(props) {
 
       {/* make dropdown-content show based on the userAction */}
       {logic.dropdownOpen ? (
-        <div className="dropdown-container" onMouseLeave={logic.handleOpenDropdown}>
+        <div
+          className="dropdown-container"
+          onMouseLeave={() => {
+            setTimeout(logic.handleOpenDropdown, 1000);
+          }}
+        >
           <div className="dropdown-header">
             <p>hello, {props.userName}</p>
             <p className="thin small grey">{props.email}</p>
@@ -36,9 +41,6 @@ function Dropdown(props) {
             </div>
             <div className="dropdown-item" onClick={redirectToTab} name="wishlist">
               {t('my wishlist')}
-            </div>
-            <div className="dropdown-item" onClick={redirectToTab} name="gifts">
-              {t('my gifts')}
             </div>
 
             {props.loggedIn ? (

@@ -25,11 +25,15 @@
 @import './components-styles/productitem.module';
 @import './components-styles/reviews.module';
 @import './components-styles/message.module';
+@import './components-styles/filterbar.module';
+@import './components-styles/productlist.module';
+@import './components-styles/path.module';
 
 //import views styles
 @import './views-styles/layout.module';
 @import './views-styles/productdetails.module';
 @import './views-styles/home.module';
 @import './views-styles/checkout.module';
+@import './views-styles/collectionpage.module';
 @import './views-styles/auth.module';
 @import './views-styles/accountsetting.module';

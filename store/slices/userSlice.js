@@ -4,6 +4,7 @@ import {
   loginUserThunk,
   signUpUserThunk,
   addOrderThunk,
+  getAddressThunk,
   changeAddressThunk,
   getOrdersThunk,
   getCouponsThunk,
@@ -28,12 +29,12 @@ const initialState = {
   wishlist: {
     error: null,
     status: 'idle',
-    data: [],
+    value: [],
   },
   orders: {
     error: null,
     status: 'idle',
-    data: [],
+    value: [],
   },
   coupons: {
     status: 'idle',
@@ -54,6 +55,13 @@ const userSlice = createSlice({
       state.info.status = 'idle';
       state.orders.status = 'idle';
       state.wishlist.status = 'idle';
+      state.coupons.status = 'idle';
+      state.address.status = 'idle';
+      state.address.error = null;
+      state.coupons.error = null;
+      state.wishlist.error = null;
+      state.orders.error = null;
+      state.info.error = null;
     },
   },
   /**
@@ -71,6 +79,7 @@ const userSlice = createSlice({
     builder
       .addCase(loginUserThunk.pending, (state, action) => {
         state.info.status = 'loading';
+        state.info.error = null;
       })
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.info.status = 'completed';
@@ -88,6 +97,7 @@ const userSlice = createSlice({
       })
       .addCase(signUpUserThunk.pending, (state, action) => {
         state.info.status = 'loading';
+        state.info.error = null;
       })
       .addCase(signUpUserThunk.fulfilled, (state, action) => {
         state.info.status = 'completed';
@@ -103,14 +113,15 @@ const userSlice = createSlice({
       })
       .addCase(addOrderThunk.pending, (state, action) => {
         state.orders.status = 'loading';
+        state.orders.error = null;
       })
       .addCase(addOrderThunk.fulfilled, (state, action) => {
         state.orders.status = 'completed';
         if (Object.keys(action.payload).includes('newOrder')) {
-          state.orders.data.push(action.payload.newOrder);
-          state.info.address = action.payload.address;
+          state.orders.value.push(action.payload.newOrder);
+          state.address.value = action.payload.address;
         } else {
-          state.orders.data.push(action.payload);
+          state.orders.value.push(action.payload);
         }
       })
       .addCase(addOrderThunk.rejected, (state, action) => {
@@ -131,10 +142,11 @@ const userSlice = createSlice({
       })
       .addCase(getOrdersThunk.pending, (state, action) => {
         state.orders.status = 'loading';
+        state.orders.error = null;
       })
       .addCase(getOrdersThunk.fulfilled, (state, action) => {
         state.orders.status = 'completed';
-        state.orders.data = action.payload;
+        state.orders.value = action.payload;
       })
       .addCase(getOrdersThunk.rejected, (state, action) => {
         state.orders.status = 'failed';
@@ -142,6 +154,7 @@ const userSlice = createSlice({
       })
       .addCase(getCouponsThunk.pending, (state, action) => {
         state.coupons.status = 'loading';
+        state.coupons.error = null;
       })
       .addCase(getCouponsThunk.fulfilled, (state, action) => {
         state.coupons.status = 'completed';
@@ -150,6 +163,18 @@ const userSlice = createSlice({
       .addCase(getCouponsThunk.rejected, (state, action) => {
         state.coupons.status = 'failed';
         state.coupons.error = action.error;
+      })
+      .addCase(getAddressThunk.pending, (state, action) => {
+        state.address.status = 'loading';
+        state.address.error = null;
+      })
+      .addCase(getAddressThunk.fulfilled, (state, action) => {
+        state.address.status = 'completed';
+        state.address.value = action.payload;
+      })
+      .addCase(getAddressThunk.rejected, (state, action) => {
+        state.address.error = action.error;
+        state.address.status = 'failed';
       })
 
       .addCase(getPersistedData, (state, action) => {

@@ -38,3 +38,22 @@
   grid-column: 2 3;
   grid-row: 2 3;
 }
+
+.home-title {
+  width: 100%;
+  padding: 0.5em 2em;
+  display: block;
+  h2 {
+    padding-inline: 0.5em;
+    display: inline-block;
+  }
+}
+
+.see-more {
+  color: rgb(0, 174, 255);
+  transition: 0.1s all;
+  &:hover {
+    transform: scale(1.01);
+    color: rgb(68, 0, 255);
+  }
+}

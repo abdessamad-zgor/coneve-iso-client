@@ -13,9 +13,6 @@ function AccountTabs(props) {
       <div className="account-tab" onClick={props.changeTab} name="wishlist">
         {t('my wishlist')}
       </div>
-      <div className="account-tab" onClick={props.changeTab} name="gifts">
-        {t('my gifts')}
-      </div>
     </div>
   );
 }

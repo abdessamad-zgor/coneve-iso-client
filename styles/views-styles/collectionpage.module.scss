@@ -1,0 +1,15 @@
+.collection-root {
+  width: 100%;
+  display: block;
+}
+
+.filter-section {
+  width: 25%;
+  border-right: 0.1em solid $border-simple;
+  display: inline-block;
+}
+
+.collection-product-list {
+  width: 75%;
+  display: inline-block;
+}

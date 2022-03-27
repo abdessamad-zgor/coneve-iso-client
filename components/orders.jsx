@@ -22,7 +22,7 @@ function Orders(props) {
 
 const matPropsToState = (state) => {
   return {
-    orders: state.user.orders.data,
+    orders: state.user.orders.value,
     uid: state.user.info.value.uid,
     status: state.user.orders.status,
   };

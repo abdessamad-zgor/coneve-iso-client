@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { getPersistedData } from '../store/common/actions';
 import Appbar from '../components/appbar';
+import Path from '../components/path';
 import Drawer from '../components/drawer';
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/footer';
@@ -16,7 +17,7 @@ function Layout(props) {
   store.subscribe(() => {
     let state = store.getState();
     let data = JSON.parse(localStorage.getItem('state'));
-    console.log(data == null);
+
     if (!isEqual(data, state)) {
       localStorage.setItem('state', JSON.stringify(state));
     }
@@ -29,6 +30,7 @@ function Layout(props) {
   return (
     <div className="layout-root">
       <Appbar />
+      <Path />
       <Drawer />
       <div className="layout-page-oulet">
         <Outlet />

@@ -2,7 +2,6 @@ import AccountTabs from '../components/accounttabs';
 import Overview from '../components/overview';
 import Orders from '../components/orders';
 import Wishlist from '../components/wishlist';
-import Gifts from '../components/gifts';
 import { useState, useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
@@ -37,8 +36,6 @@ function setContent(tabName) {
       return <Orders />;
     case 'wishlist':
       return <Wishlist />;
-    case 'gifts':
-      return <Gifts />;
   }
 }
 
