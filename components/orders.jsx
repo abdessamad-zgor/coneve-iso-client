@@ -6,9 +6,11 @@ import OrderItem from './orderitem';
 
 function Orders(props) {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getOrdersThunk(props.uid));
+    dispatch(getOrdersThunk({ uid: props.uid, idToken: props.idToken }));
   }, []);
+
   return (
     <div className="orders">
       {props.status == 'completed' && props.orders.length > 1
@@ -24,6 +26,7 @@ const matPropsToState = (state) => {
   return {
     orders: state.user.orders.value,
     uid: state.user.info.value.uid,
+    idToken: state.user.info.idToken,
     status: state.user.orders.status,
   };
 };

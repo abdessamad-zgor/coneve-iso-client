@@ -16,6 +16,9 @@ const ProductDetails = require('../views/ProductDetails').default;
 const Collectionpage = require('../views/Collectionpage').default;
 const NotFound = require('../views/NotFound').default;
 const AccountSettings = require('../views/AccountSettings').default;
+const Overview = require('../components/overview').default;
+const Orders = require('../components/orders').default;
+const Wishlist = require('../components/wishlist').default;
 const { getProductInView, populateIndex } = require('../store/thunks/productsThunk');
 
 const routes = [
@@ -39,17 +42,31 @@ const routes = [
         fetchData: (store, params) => store.dispatch(getProductInView(params.id)),
       },
       {
-        path: 'collections/:id',
+        path: 'collections',
         element: <Collectionpage />,
-        fetchData: (path) => getCollection(path),
+        fetchData: (store, params = {}) => store.dispatch(populateIndex()),
       },
       {
         path: 'auth',
         element: <Auth />,
       },
       {
-        path: 'account',
+        path: 'account/',
         element: <AccountSettings />,
+        children: [
+          {
+            path: 'overview',
+            element: <Overview />,
+          },
+          {
+            path: 'orders',
+            element: <Orders />,
+          },
+          {
+            path: 'wishlist',
+            element: <Wishlist />,
+          },
+        ],
       },
       {
         path: '*',

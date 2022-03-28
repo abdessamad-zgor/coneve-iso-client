@@ -4,9 +4,10 @@ import CapitilizeString from '../helpers/capitalize';
 
 function CartItem({ product, order }) {
   const { increaseQuantity, decreaseQuantity } = useLogic(product);
+
   return (
     <div className="cartitem">
-      <img src={product.image} alt="" className="cart-item-img" />
+      <img src={product.image} alt="" className={order ? 'order-item-img' : 'cart-item-img'} />
       <div className="cart-item-product-info">
         <h4>{CapitilizeString(product.title)}</h4>
         <p className="grey small">{product.price} MAD</p>

@@ -7,7 +7,7 @@ function Overview(props) {
   return (
     <div className="overview">
       <UserInfo userInfo={props.user} />
-      <ShippingAddress defaultAddress={props.address} />
+      <ShippingAddress defaultAddress={props.address} user={props.user} />
     </div>
   );
 }

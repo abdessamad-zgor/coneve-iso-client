@@ -12,7 +12,7 @@ function Dropdown(props) {
   const { t, i18n } = useTranslation('translation');
 
   const redirectToTab = (e) => {
-    navigate('/account', { state: { tab: e.target.getAttribute('name') } });
+    navigate(`/account/${e.target.getAttribute('name')}`);
   };
   return (
     <div className="dropdown">
@@ -58,9 +58,8 @@ function Dropdown(props) {
                 className="fab-small"
                 onClick={() =>
                   i18n.changeLanguage('fr', (error, t) => {
-                    console.log('hello translation');
                     console.log(error);
-                    console.log(t('save'));
+
                     console.log(i18n.language);
                   })
                 }
