@@ -17,11 +17,11 @@ const loginUserThunk = createAsyncThunk('user/loginUser', async (data) => {
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'GET',
       headers: {
-        Authorization: `BASIC ${resAuth.idToken}`,
+        Authorization: `BASIC ${resAuth.idToken} ${resAuth.refreshToken}`,
       },
     });
 
-    return { ...resAuth, ...resUser };
+    return resUser;
   } catch (e) {
     throw e;
   }
@@ -35,16 +35,16 @@ const signUpUserThunk = createAsyncThunk('user/signUpUser', async (data) => {
       method: 'POST',
       body: { email: data.email, password: data.password, returnSecureToken: true },
     });
-    await fetch({
+    let resUser = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${resAuth.localId}`,
       method: 'POST',
       body: { ...data },
       headers: {
-        Authorization: `BASIC ${resAuth.idToken}`,
+        Authorization: `BASIC ${resAuth.idToken} ${resAuth.refreshToken}`,
       },
     });
 
-    return data;
+    return resUser;
   } catch (e) {
     throw e;
   }
@@ -64,17 +64,23 @@ const addOrderThunk = createAsyncThunk('user/addOrder', async (data) => {
   //   console.error(e);
   // }
   try {
-    await fetch({
-      url: `http://localhost:5000/api/authenticated/users/${data.user.uid}/orders`,
+    let response = await fetch({
+      url: `http://localhost:5000/api/authenticated/users/${data.uid}/orders`,
       method: 'POST',
-      body: { ...data },
-      headers: { Authorization: `BASIC ${data.idToken}` },
+      body: {
+        products: data.products,
+        user: data.user.value,
+        address: data.address,
+        estimatedTotal: data.estimatedTotal,
+        orderedAt: data.orderedAt,
+      },
+      headers: { Authorization: `BASIC ${data.idToken} ${data.refreshToken}` },
     });
     if (data.address.setDefaultAddress) {
       const { setDefaultAddress, ...pureAddress } = data.address;
-      return { newOrder: data, address: pureAddress };
+      return { order: data, newAddress: pureAddress, idToken: response.idToken, refreshToken: response.refreshToken };
     } else {
-      return { ...data };
+      return { order: data, ...response };
     }
   } catch (e) {
     throw e;
@@ -105,7 +111,7 @@ const getAddressThunk = createAsyncThunk('user/getAddress', async (data) => {
     let response = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${data.uid}/address`,
       method: 'GET',
-      headers: { Authorization: `BASIC ${data.idToken}` },
+      headers: { Authorization: `BASIC ${data.idToken} ${data.refreshToken}` },
     });
     return response;
   } catch (e) {
@@ -126,9 +132,9 @@ const getOrdersThunk = createAsyncThunk('user/getOrder', async (data) => {
     let response = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${data.uid}/orders`,
       method: 'GET',
-      headers: { Authorization: `BASIC ${data.idToken}` },
+      headers: { Authorization: `BASIC ${data.idToken} ${data.refreshToken}` },
     });
-    return response.orders;
+    return response;
   } catch (e) {
     throw e;
   }
@@ -147,9 +153,24 @@ const getCouponsThunk = createAsyncThunk('user/getCoupons', async (data) => {
     let response = await fetch({
       url: `http://localhost:5000/api/authenticated/users/${data.uid}/coupons`,
       method: 'GET',
-      headers: { Authorization: `BASIC ${data.idToken}` },
+      headers: { Authorization: `BASIC ${data.idToken} ${data.refreshToken}` },
     });
-    return response.coupons;
+    return response;
+  } catch (e) {
+    throw e;
+  }
+});
+
+const changeUserInfoThunk = createAsyncThunk('user/changeUserInfo', async (data) => {
+  try {
+    let response = await fetch({
+      url: `http://localhost:5000/api/authenticated/users/${data.uid}`,
+      method: 'PUT',
+      headers: { Authorization: `BASIC ${data.idToken} ${data.refreshToken}` },
+      body: data.data,
+    });
+
+    return data.data;
   } catch (e) {
     throw e;
   }
@@ -164,4 +185,5 @@ export {
   getOrdersThunk,
   getCouponsThunk,
   getAddressThunk,
+  changeUserInfoThunk,
 };

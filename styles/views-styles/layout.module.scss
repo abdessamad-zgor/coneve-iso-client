@@ -1,7 +1,6 @@
 .layout-root {
   width: 100%;
   position: relative;
-  overflow-x: hidden;
 }
 .layout-page-oulet {
   padding-top: 5em;
@@ -11,6 +10,7 @@
 body {
   font-family: $dfl-font;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 * {

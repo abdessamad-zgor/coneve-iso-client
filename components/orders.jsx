@@ -8,7 +8,7 @@ function Orders(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrdersThunk({ uid: props.uid, idToken: props.idToken }));
+    dispatch(getOrdersThunk({ uid: props.uid, idToken: props.idToken, refreshToken: props.refreshToken }));
   }, []);
 
   return (
@@ -25,9 +25,10 @@ function Orders(props) {
 const matPropsToState = (state) => {
   return {
     orders: state.user.orders.value,
-    uid: state.user.info.value.uid,
+    uid: state.user.info.uid,
     idToken: state.user.info.idToken,
     status: state.user.orders.status,
+    refreshToken: state.user.info.refreshToken,
   };
 };
 

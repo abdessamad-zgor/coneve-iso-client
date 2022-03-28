@@ -5,7 +5,6 @@ let router = new express.Router();
 
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body);
     let response = await fetch({
       url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.API_KEY}`,
       body: req.body,
@@ -37,7 +36,6 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
   try {
-    console.log(req.body);
     let response = await fetch({
       url: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.API_KEY}`,
       body: req.body,
@@ -50,13 +48,11 @@ router.post('/signup', async (req, res) => {
     if (e.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log('response');
       console.log(e.response.data);
       console.log(e.response.status);
       console.log(e.response.headers);
       res.status(500).json({ status: 'error', error: e.response });
     } else if (e.request) {
-      console.log('request');
       // The request was made but no response was received
       // `e.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js

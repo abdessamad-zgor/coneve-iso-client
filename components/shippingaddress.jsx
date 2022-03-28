@@ -21,7 +21,7 @@ function ShippingAddress(props) {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getAddressThunk({ uid: props.user.uid, idToken: props.idToken }));
+    dispatch(getAddressThunk({ uid: props.user.uid, idToken: props.idToken, refreshToken: props.refreshToken }));
   }, []);
 
   //check if the component is in the Checkout view
@@ -34,16 +34,25 @@ function ShippingAddress(props) {
     if (isCheckout) {
       let order = {
         products: props.cartItems,
-        user: props.user,
+        user: props.user.value,
+        uid: props.user.uid,
         estimatedTotal: props.total,
         address: data,
         orderedAt: Date.now(),
-        idToken: props.idToken,
+        idToken: props.user.idToken,
+        refreshToken: props.user.refreshToken,
       };
       dispatch(addOrderThunk(order));
     } else {
       if (!isEqual(props.address, address)) {
-        dispatch(changeAddressThunk({ ...address, idToken: props.idToken }));
+        dispatch(
+          changeAddressThunk({
+            ...address,
+            uid: props.user.uid,
+            idToken: props.idToken,
+            refreshToken: props.refreshToken,
+          })
+        );
       }
     }
   };
@@ -84,66 +93,71 @@ function ShippingAddress(props) {
   return (
     <div className="address">
       {props.status == 'completed' ? <Message type="success" msg="Order was added successfully." /> : ''}
-      <form className="address-form" onSubmit={handleSubmit(Submit)}>
-        <div className="address-header">
-          <h1 className="address-title"> {t('shipping Address')}</h1>
-        </div>
-        <div className="address-row">
-          <label htmlFor="" className="address-label">
-            {t('Full Name')}
-          </label>
-          <input
-            className="address-input"
-            defaultValue={props.defaultAddress.fullName}
-            type="text"
-            {...register('fullName', { required: true })}
-          />
-          {errors.fullName && <span className="error-input">Enter a valid Full Name.</span>}
-        </div>
-
-        <div className="address-flex">
-          <div className="half">
-            <label htmlFor="" className="address-label">
-              {t('Phone Number')}
-            </label>
-            <input
-              className="address-input"
-              defaultValue={props.defaultAddress.phone}
-              {...register('phone', { required: true })}
-              type="tel"
-            />
-            {errors.phone && <span className="error-input">Enter a valid phone number.</span>}
+      {props.defaultAddress != undefined ? (
+        <form className="address-form" onSubmit={handleSubmit(Submit)}>
+          <div className="address-header">
+            <h1 className="address-title"> {t('shipping Address')}</h1>
           </div>
-          <div className="half">
+          <div className="address-row">
             <label htmlFor="" className="address-label">
-              {t('City')}
+              {t('Full Name')}
             </label>
             <input
               className="address-input"
-              defaultValue={props.defaultAddress.city}
-              {...register('city', { required: true })}
-              name="city"
+              defaultValue={props.defaultAddress.fullName}
+              type="text"
+              {...register('fullName', { required: true })}
+            />
+            {errors.fullName && <span className="error-input">Enter a valid Full Name.</span>}
+          </div>
+
+          <div className="address-flex">
+            <div className="half">
+              <label htmlFor="" className="address-label">
+                {t('Phone Number')}
+              </label>
+              <input
+                className="address-input"
+                defaultValue={props.defaultAddress.phone}
+                {...register('phone', { required: true })}
+                type="tel"
+              />
+              {errors.phone && <span className="error-input">Enter a valid phone number.</span>}
+            </div>
+            <div className="half">
+              <label htmlFor="" className="address-label">
+                {t('City')}
+              </label>
+              <input
+                className="address-input"
+                defaultValue={props.defaultAddress.city}
+                {...register('city', { required: true })}
+                name="city"
+                type="text"
+              />
+              {errors.city && <span className="error-input">Choose the city you live in .</span>}
+            </div>
+          </div>
+          <div className="address-row">
+            <label htmlFor="" className="address-label">
+              {t('Street Address')}
+            </label>
+            <input
+              className="address-input"
+              defaultValue={props.defaultAddress.streetAddress}
+              {...register('streetAddress', { required: true })}
+              name="streetAddress"
               type="text"
             />
-            {errors.city && <span className="error-input">Choose the city you live in .</span>}
+            {errors.streetAddress && <span className="error-input">Enter a valid street address .</span>}
           </div>
-        </div>
-        <div className="address-row">
-          <label htmlFor="" className="address-label">
-            {t('Street Address')}
-          </label>
-          <input
-            className="address-input"
-            defaultValue={props.defaultAddress.streetAddress}
-            {...register('streetAddress', { required: true })}
-            name="streetAddress"
-            type="text"
-          />
-          {errors.streetAddress && <span className="error-input">Enter a valid street address .</span>}
-        </div>
 
-        <div className="address-footer">{footer()}</div>
-      </form>
+          <div className="address-footer">{footer()}</div>
+        </form>
+      ) : (
+        ''
+      )}
+
       {props.status == 'failed' ? <Message type="error" msg={props.error.msg} /> : ''}
     </div>
   );
@@ -153,6 +167,8 @@ const mapStateToProps = (state) => {
   return {
     defaultAddress: state.user.address.value,
     idToken: state.user.info.idToken,
+    refreshToken: state.user.info.refreshToken,
+    uid: state.user.info.uid,
   };
 };
 

@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function useLogic(props) {
   const [aboveMin, setAboveMin] = useState(getTotal >= 150);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    if (getTotal() >= 150) {
+    if (getTotal() >= 150 && props.user.loggedIn) {
       setAboveMin(true);
+    } else if (props.user.loggedIn) {
+      navigate('/auth');
     }
-  }, [props.cartItems.length]);
+  }, [props.cartItems.length, props.user.loggedIn]);
 
   const getTotal = () => {
     let total = 0;

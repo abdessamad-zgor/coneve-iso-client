@@ -57,7 +57,7 @@ const addReview = createAsyncThunk('products/addReview', async (params) => {
       method: 'POST',
       body: params.data,
       headers: {
-        Authorization: `BASIC ${params.idToken}`,
+        Authorization: `BASIC ${params.idToken} ${params.refreshToken}`,
       },
     });
     return { ...params.data };

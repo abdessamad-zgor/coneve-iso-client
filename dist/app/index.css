@@ -1379,7 +1379,6 @@
 .layout-root {
   width: 100%;
   position: relative;
-  overflow-x: hidden;
 }
 
 .layout-page-oulet {
@@ -1391,6 +1390,7 @@
 body {
   font-family: "Ubuntu", sans-serif;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 * {

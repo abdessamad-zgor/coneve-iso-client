@@ -51,7 +51,7 @@ function Checkout(props) {
 const mapStateToProps = (state) => {
   return {
     cartItems: state.cart.products,
-    user: state.user.info.value,
+    user: state.user.info,
     status: state.user.orders.status,
     error: state.user.orders.error,
     coupons: state.user.coupons.value,

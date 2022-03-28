@@ -8,6 +8,7 @@ import {
   changeAddressThunk,
   getOrdersThunk,
   getCouponsThunk,
+  changeUserInfoThunk,
 } from '../thunks/userThunks';
 import { getPersistedData, signOutUser } from '../common/actions';
 
@@ -84,11 +85,9 @@ const userSlice = createSlice({
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.info.status = 'completed';
         state.info.idToken = action.payload.idToken;
-        state.info.value.uid = action.payload.localId;
+        state.info.uid = action.payload.uid;
         state.info.refreshToken = action.payload.refreshToken;
-        state.info.value.fullName = action.payload.fullName;
-        state.info.value.phone = action.payload.phone;
-        state.info.value.email = action.payload.email;
+        state.info.value = action.payload.info;
         state.info.loggedIn = true;
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
@@ -101,10 +100,10 @@ const userSlice = createSlice({
       })
       .addCase(signUpUserThunk.fulfilled, (state, action) => {
         state.info.status = 'completed';
-        state.info.value.fullName = action.payload.fullName;
-        state.info.value.phone = action.payload.phone;
-        state.info.value.email = action.payload.email;
-
+        state.info.value = action.payload.newUser;
+        state.info.uid = action.payload.uid;
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
         state.info.loggedIn = true;
       })
       .addCase(signUpUserThunk.rejected, (state, action) => {
@@ -117,12 +116,14 @@ const userSlice = createSlice({
       })
       .addCase(addOrderThunk.fulfilled, (state, action) => {
         state.orders.status = 'completed';
-        if (Object.keys(action.payload).includes('newOrder')) {
-          state.orders.value.push(action.payload.newOrder);
-          state.address.value = action.payload.address;
+        if (Object.keys(action.payload).includes('newAddress')) {
+          state.orders.value.push(action.payload.order);
+          state.address.value = action.payload.newAddress;
         } else {
-          state.orders.value.push(action.payload);
+          state.orders.value.push(action.payload.order);
         }
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
       })
       .addCase(addOrderThunk.rejected, (state, action) => {
         state.orders.status = 'failed';
@@ -146,7 +147,9 @@ const userSlice = createSlice({
       })
       .addCase(getOrdersThunk.fulfilled, (state, action) => {
         state.orders.status = 'completed';
-        state.orders.value = action.payload;
+        state.orders.value = action.payload.orders;
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
       })
       .addCase(getOrdersThunk.rejected, (state, action) => {
         state.orders.status = 'failed';
@@ -158,7 +161,9 @@ const userSlice = createSlice({
       })
       .addCase(getCouponsThunk.fulfilled, (state, action) => {
         state.coupons.status = 'completed';
-        state.coupons.value = action.payload;
+        state.coupons.value = action.payload.coupons;
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
       })
       .addCase(getCouponsThunk.rejected, (state, action) => {
         state.coupons.status = 'failed';
@@ -170,11 +175,27 @@ const userSlice = createSlice({
       })
       .addCase(getAddressThunk.fulfilled, (state, action) => {
         state.address.status = 'completed';
-        state.address.value = action.payload;
+        state.address.value = action.payload.address;
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
       })
       .addCase(getAddressThunk.rejected, (state, action) => {
         state.address.error = action.error;
         state.address.status = 'failed';
+      })
+      .addCase(changeUserInfoThunk.pending, (state, action) => {
+        state.info.status = 'loading';
+        state.info.error = null;
+      })
+      .addCase(changeUserInfoThunk.fulfilled, (state, action) => {
+        state.info.status = 'completed';
+        state.info.value = action.payload.info;
+        state.info.idToken = action.payload.idToken;
+        state.info.refreshToken = action.payload.refreshToken;
+      })
+      .addCase(changeUserInfoThunk.rejected, (state, action) => {
+        state.info.status = 'failed';
+        state.info.error = action.error;
       })
 
       .addCase(getPersistedData, (state, action) => {
