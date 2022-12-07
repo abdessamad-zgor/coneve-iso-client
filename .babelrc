@@ -1,4 +1,0 @@
-{
-  "presets": ["@babel/preset-env", ["@babel/preset-react", { "runtime": "automatic", "ssr": true }]],
-  "plugins": ["@babel/plugin-transform-runtime", "@babel/plugin-syntax-dynamic-import", "@emotion"]
-}
