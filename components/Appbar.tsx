@@ -68,7 +68,7 @@ const Appbar = () => {
                   <p className='font-light'><span className='text-2xl font-bold md:text-3xl'>34</span>. 44  MAD</p>
                 </div>
               </div>
-              <button className=" w-full px-2  font-sans text-xl font-bold py-2 bg-stone-600 text-white"> go to checkout</button>
+              <button className=" w-full px-2  font-sans text-xl font-bold py-2 bg-emerald-600 text-white"> go to checkout</button>
             </Dropdown>
           </div>
 

@@ -75,10 +75,10 @@ interface products {
 interface api<T>{
   store: T;
   getbySlug: (slug: string) => Product | Error;
-  getIndex: () => Array<{ title: string; image: string; price: number }>;
+  getIndex: () => Array<{ title: string; image: string; price: number, slug:string}>;
 }
 
-interface Product {
+export interface Product {
   title: string;
   price: (qt: number) => number;
   volume: string;
@@ -87,6 +87,7 @@ interface Product {
     others?: Array<string>;
   };
   categorie: string;
+  slug?:string
 }
 
 const reviews = {};
@@ -98,7 +99,7 @@ const orders = {};
 let productsApi: api<products> = {
   store: products,
   getbySlug: function (slug: string) {
-    return products[slug] ? products[slug] : new Error("Product not found");
+    return products[slug] ? {slug,...products[slug]} : new Error("Product not found");
   },
   getIndex: function () {
     return Object.keys(this.store).map((key) => {
@@ -106,6 +107,7 @@ let productsApi: api<products> = {
         title: this.store[key].title,
         price: this.store[key].price(1),
         image: this.store[key].images.main,
+        slug: key
       };
     });
   },
