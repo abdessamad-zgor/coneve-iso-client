@@ -3,6 +3,7 @@ import Image from "next/image"
 import {useForm} from "react-hook-form"
 
 const Checkout = () => {
+  const {register, handleSubmit} = useForm()
   return (
     <div className="w-full">
       <h1 className="font-bold text-6xl py-4 border-b-2 border-rose-600 text-emerald-700">
