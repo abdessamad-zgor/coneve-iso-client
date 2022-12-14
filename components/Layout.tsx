@@ -6,7 +6,7 @@ const Layout = (props: PropTypes) => {
     return (
         <>
             <Appbar />
-            <main>{props.children}</main>
+            <main className="pb-[100px]">{props.children}</main>
             <Footer />
         </>
     )

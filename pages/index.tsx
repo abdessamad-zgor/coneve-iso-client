@@ -20,6 +20,7 @@ export default function Home() {
                 fill={true}
 
               />
+              
             </div>
 
             <div className="backdrop-blur-sm  w-full h-[100%] z-10 text-center">
@@ -33,7 +34,7 @@ export default function Home() {
         <h1 className="text-4xl underline decoration-4 font-serif font-bold text-rose-500">Featured</h1>
         <div className="flex flex-row wrap w-full gap-2 px-4 py-8">
           {
-            productsApi.getIndex().map(v => <Card type="products" {...v} />)
+            productsApi.getIndex().map((v, i) => <Card type="products" key={i} {...v} />)
           }
         </div>
       </section>

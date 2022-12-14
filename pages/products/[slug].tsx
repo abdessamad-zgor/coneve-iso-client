@@ -43,7 +43,7 @@ const ProductDetails = () => {
 
         </div>
         <span className="absolute w-[5%] items-center p-4 top-0 bottom-0 right-0 flex flex-col gap-2">
-          <button className='w-[3em] transition-all  hover:w-[400%] h-[3em] hover:flex hover:flex-row hover:items-center hover:justify-center group rounded-full bg-emerald-500 p-2 fill-white shadow-md '>
+          <button className='w-[3em] transition-all hover:w-[400%] h-[3em] hover:flex hover:flex-row hover:items-center hover:justify-center group rounded-full bg-emerald-500 p-2 fill-white shadow-md '>
             <span className="w-[3em] h-[3em] group-hover:p-2 rounded-full "><CartAddIcon /></span>
             
             <p className='hidden group-hover:block text-md font-light text-white font-mono px-2'>Add to Cart</p>

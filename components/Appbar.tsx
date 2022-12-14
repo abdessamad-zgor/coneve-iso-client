@@ -3,6 +3,7 @@ import { useState } from "react"
 import logo from "../public/asoul_logo.png"
 import { Carticon, Usericon, Hearticon, Barsicon } from "../icons"
 import Dropdown from "./Dropdown"
+import Link from "next/link"
 
 const Appbar = () => {
   let [activeCart, setActiveCart] = useState(false);
@@ -12,14 +13,15 @@ const Appbar = () => {
     <header className=''>
       <nav className="py-2 px-8 flex flex-row justify-between md:justify-start items-center border-b-2 border-stone-700">
         <div className="basis-2/12 flex ">
-          <Image
+          <Link href="/"><Image
             src={logo}
             alt="logo"
             width={80}
-          />
+          /></Link>
+          
         </div>
         <input type="text" className="mr-2 bg-stone-100 rounded px-4 py-2 basis-5/12 hidden md:block" placeholder="search" />
-        <div className="flex bg-white border-t-2 md:border-none flex-row justify-around  items-center basis-5/12 fixed bottom-0 h-auto left-0 right-0 md:relative md:flex">
+        <div className="flex bg-white border-t-2 md:border-none flex-row justify-around  items-center basis-5/12 fixed z-10 bottom-0 h-auto left-0 right-0 md:relative md:flex">
           <div className="md:basis-3/5 p-2 flex flex-col md:flex-row md:border-r-2 border-stone-300">
             <span className="w-[3em] h-[3em] p-2 rounded-full hover:fill-rose-700"><Usericon /></span>
             <span className="text-center">
@@ -27,7 +29,7 @@ const Appbar = () => {
                 Welcome!
               </h2>
               <p className="font-light hidden text-stone-400 text-md md:block">
-                <a href="">Sign up</a> Or <a href="">Log In</a>
+                <Link href="/auth/signup">Sign up</Link> Or <a href="/auth/login">Log In</a>
               </p>
               <p className="font-light block text-stone-400 text-md md:hidden">
                 User
@@ -68,7 +70,7 @@ const Appbar = () => {
                   <p className='font-light'><span className='text-2xl font-bold md:text-3xl'>34</span>. 44  MAD</p>
                 </div>
               </div>
-              <button className=" w-full px-2  font-sans text-xl font-bold py-2 bg-emerald-600 text-white"> go to checkout</button>
+              <Link href="/checkout" className=" w-full px-2 text-center font-sans text-xl font-bold py-2 bg-emerald-600 text-white"> go to checkout</Link>
             </Dropdown>
           </div>
 
