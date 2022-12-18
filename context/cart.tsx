@@ -15,16 +15,16 @@ let CartContext = createContext(initialState())
 let cartReducer = (state:any, action:any)=>{
     switch(action?.type){
         case "ADD_PRODUCT":
-            return {products: [...state.products, action?.payload]}
+            return {...state, state: {products: [...state.state.products, action?.payload]}}
         case "REMOVE_PRODUCT":
-            let newCart = state.products.filter((v:any)=>v.slug!=action.payload.slug)
-            return {products: newCart}
+            let newCart = state.state.products.filter((v:any)=>v.slug!=action.payload.slug)
+            return {...state, state: {products: newCart}}
         default:
             return state
     }
 }
 
-export let useCart = ()=>useContext(CartContext)
+export let useCart = ()=>{return useContext(CartContext)}
 
 
 export function CartProvider(props: {children: React.ReactNode}){

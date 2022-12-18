@@ -22,16 +22,16 @@ export default function Home() {
 
             </div>
 
-            <div className="backdrop-blur-sm  w-full h-[100%] z-10 text-center">
-              <h1>Salling Header</h1>
-              <button className='py-2 px-4 bg-rose-700 border-2 border-[rgba(0,0,0,0.0)] hover: border-white'>Buy now</button>
+            <div className="backdrop-blur-sm  w-full h-[100%] z-10 relative">
+              <h1 className="text-7xl text-white font-bold drop-shadow absolute top-[1em] left-[1em]">Find out out new summer collection</h1>
+              <button className='py-4 px-8 text-white text-2xl absolute right-[3em] bottom-[3em] bg-rose-700 border-2 rounded-lg border-transparent focus:animate:bounce hover:border-rose-400'>Buy now</button>
             </div>
           </div>
         </Slider>
       </div>
-      <section>
-        <h1 className="text-4xl underline decoration-4 font-serif font-bold text-rose-500">Featured</h1>
-        <div className="flex flex-row wrap w-full gap-2 px-4 py-8">
+      <section className="bg-gradient-to-r via-slate-100 from-emerald-100 to-rose-100">
+        <h1 className="text-5xl pl-8 py-4 underline decoration-4 font-bold text-rose-700">Featured</h1>
+        <div className="flex flex-row wrap w-full justify-center gap-2 px-4 py-8">
           {
             (productsApi.getIndex().data as Array<{
               title: string;

@@ -12,18 +12,18 @@ export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
   let BaseLayout = router.pathname.split("/").includes("admin") ? (props: { children: React.ReactNode }) => <>{props.children}</> : Layout
 
-  return (
+  return (<CartProvider>
     <SessionContextProvider
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <CartProvider>
+      
         <BaseLayout>
           <Component {...pageProps} />
         </BaseLayout>
-      </CartProvider>
+      
 
-    </SessionContextProvider>
+    </SessionContextProvider></CartProvider>
 
   )
 }
