@@ -53,7 +53,7 @@ interface products {
   [key: string]: Product;
 }
 
-type Response<T> = {
+export type Response<T> = {
   data: T | null,
   error: Error |null
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Product, productsApi, getPrice } from '../../db'
+import { Product, Response, productsApi, getPrice } from '../../db'
 import Image from 'next/image'
 import { useCart } from '../../context/cart'
 import { CartAddIcon, Hearticon } from '../../icons'
 
-const ProductDetails = (props) => {
+const ProductDetails = (props:PropTypes) => {
   if(props.product.error){
     return <div>NOT Found</div>
   }
@@ -73,4 +73,8 @@ export async  function getServerSideProps(context: { params: { slug: string } })
       product
     }
   }
+}
+
+type PropTypes = {
+  product:Response<Product>
 }
