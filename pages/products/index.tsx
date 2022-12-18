@@ -8,16 +8,21 @@ const Products = () => {
     <div className='w-full'>
 
       <div className=" flex flex-col md:flex-row">
-      <aside className=' basis-3/12'>
+        <aside className=' basis-3/12'>
 
-      </aside>
-      <div className="flex flex-col md:flex-row gap-2 wrap">
-        {
-          productsApi.getIndex().map(v => <Card type="products" {...v} />)
-        }
-      </div>
+        </aside>
+        <div className="flex flex-col md:flex-row gap-2 wrap">
+          {
+            (productsApi.getIndex().data as Array<{
+              title: string;
+              image: string;
+              price: number;
+              slug: string;
+            }>).map((v, i) => <Card type="products" key={i} {...v} />)
+          }
+        </div>
 
-    </div></div>
+      </div></div>
 
   )
 }
