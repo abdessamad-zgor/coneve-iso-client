@@ -4,8 +4,10 @@ import logo from "../public/asoul_logo.png"
 import { Carticon, Usericon, Hearticon, Barsicon } from "../icons"
 import Dropdown from "./Dropdown"
 import Link from "next/link"
+import { useUser } from "@supabase/auth-helpers-react"
 
 const Appbar = () => {
+  let user = useUser()
   let [activeCart, setActiveCart] = useState(false);
   let [activeUser, setActiveUser] = useState(false);
   let [activeWishlist, setActiveWishlist] = useState(false);
@@ -18,19 +20,22 @@ const Appbar = () => {
             alt="logo"
             width={80}
           /></Link>
-          
+
         </div>
         <input type="text" className="mr-2 bg-stone-100 rounded px-4 py-2 basis-5/12 hidden md:block" placeholder="search" />
         <div className="flex bg-white border-t-2 md:border-none flex-row justify-around  items-center basis-5/12 fixed z-10 bottom-0 h-auto left-0 right-0 md:relative md:flex">
           <div className="md:basis-3/5 p-2 flex flex-col md:flex-row md:border-r-2 border-stone-300">
             <span className="w-[3em] h-[3em] p-2 rounded-full hover:fill-rose-700"><Usericon /></span>
             <span className="text-center">
-              <h2 className="text-xl hidden md:block">
-                Welcome!
+              <h2 className="text-md hidden md:block">
+                Welcome! {user?.email}
               </h2>
-              <p className="font-light hidden text-stone-400 text-md md:block">
-                <Link href="/auth/signup">Sign up</Link> Or <a href="/auth/login">Log In</a>
-              </p>
+              {
+                !user ? <p className="font-light hidden text-stone-400 text-md md:block">
+                  <Link href="/auth/signup">Sign up</Link> Or <a href="/auth/login">Log In</a>
+                </p> : ""
+              }
+
               <p className="font-light block text-stone-400 text-md md:hidden">
                 User
               </p>
@@ -41,7 +46,7 @@ const Appbar = () => {
             <p className="font-light text-stone-400 text-md">Wishlist</p>
           </div>
           <div className="flex flex-col relative md:basis-1/5 px-2 items-center hover:fill-rose-700 ">
-            <div className="w-[2em] h-[2em]  rounded-full" onClick={()=>setActiveCart(!activeCart)}><Carticon /></div>
+            <div className="w-[2em] h-[2em]  rounded-full" onClick={() => setActiveCart(!activeCart)}><Carticon /></div>
             <p className="font-light text-stone-400 text-md">Cart</p>
             <Dropdown active={activeCart}>
               <div className=""></div>

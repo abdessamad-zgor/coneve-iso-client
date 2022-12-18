@@ -1,6 +1,5 @@
 import Head from 'next/head'
-// import testBg from "../public/bg-bg.jpg"
-// import productImage from "../public/product.jpeg"
+
 import Slider from "react-slick"
 import { productsApi } from '../db'
 import Image from "next/image"
@@ -20,7 +19,7 @@ export default function Home() {
                 fill={true}
 
               />
-              
+
             </div>
 
             <div className="backdrop-blur-sm  w-full h-[100%] z-10 text-center">
@@ -34,7 +33,12 @@ export default function Home() {
         <h1 className="text-4xl underline decoration-4 font-serif font-bold text-rose-500">Featured</h1>
         <div className="flex flex-row wrap w-full gap-2 px-4 py-8">
           {
-            productsApi.getIndex().map((v, i) => <Card type="products" key={i} {...v} />)
+            (productsApi.getIndex().data as Array<{
+              title: string;
+              image: string;
+              price: number;
+              slug: string;
+            }>).map((v, i) => <Card type="products" key={i} {...v} />)
           }
         </div>
       </section>
